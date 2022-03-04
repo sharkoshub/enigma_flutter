@@ -9,9 +9,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: appTitle,
-      home: AddPage(title: appTitle),
+      home: AddPage(),
     );
   }
 }
@@ -20,14 +20,12 @@ class MyApp extends StatelessWidget {
 Classe permettant d'ajouter les ventes
  */
 class AddPage extends StatelessWidget {
-  const AddPage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      // Contenu de la page AddPage
+      appBar: AppBar(title: Text('Enigma Commerce')),
       body: ListView(
         children: <Widget>[
           Image.asset('assets/header_img.png'),
@@ -48,6 +46,59 @@ class AddPage extends StatelessWidget {
               title: const Text('Ajouter une vente'),
               onTap: () {
                 Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('Bilan des ventes'),
+              onTap: () {
+                // Redirection vers ReportPage
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ReportPage()),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/**
+Classe permettant de voir le bilan des ventes
+ */
+class ReportPage extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // Contenu de la page ReportPage
+      appBar: AppBar(title: Text('Enigma Commerce')),
+      body: ListView(
+        children: <Widget>[
+          Image.asset('assets/bilan.gif'),
+        ],
+      ),
+      // Ajout du Drawer
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.yellow,
+              ),
+              child: Text('Enigma Commerce'),
+            ),
+            ListTile(
+              title: const Text('Ajouter une vente'),
+              onTap: () {
+                // Redirection vers AddPage
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddPage()),
+                );
               },
             ),
             ListTile(
